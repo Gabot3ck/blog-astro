@@ -1,21 +1,28 @@
 ---
-import BlogPost from "../components/BlogPost.astro";
+import { getCollection } from "astro:content";
+
 import MainLayaout from "../layouts/MainLayaout.astro";
+import TypedBlogPost from "../components/TypedBlogPost.astro"
 import "../styles/global.css";
+
+
+const blogPosts = await getCollection('blog');
 ---
 
 <MainLayaout title="Andeslock">
   <!-- component -->
-  <section class="bg-white dark:bg-gray-900">
+  <section class= dark:bg-gray-900">
     <div class="container px-6 py-10 mx-auto">
       <h1
-        class="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white"
+        class="text-3xl font-semibold text-white capitalize lg:text-4xl"
       >
         From the blog
       </h1>
 
       <div class="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
-        
+        {
+          blogPosts.map(post => <TypedBlogPost post={ post } />)
+        }
 
       </div>
     </div>
